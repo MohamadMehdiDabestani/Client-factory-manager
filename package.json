@@ -9,9 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.9.1",
+    "@reduxjs/toolkit": "^1.8.3",
+    "@types/react-redux": "^7.1.24",
+    "@types/redux": "^3.6.0",
+    "axios": "^0.27.2",
+    "cookies-next": "^2.1.1",
+    "formik": "^2.2.9",
+    "immer": "^9.0.15",
     "next": "12.2.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-redux": "^8.0.2",
+    "redux": "^4.2.0",
+    "redux-devtools-extension": "^2.13.9",
+    "stylis": "^4.1.1",
+    "stylis-plugin-rtl": "^2.1.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "18.0.6",

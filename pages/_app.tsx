@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { Navbar, Notification, StyleManagment } from "@/components";
+import { Navbar, Notification, StyleManagment, UserLayout } from "@/components";
 import { Provider } from "react-redux";
 import { store } from "@/redux_/store";
 function MyApp({ Component, pageProps }: AppProps) {
@@ -7,9 +7,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <StyleManagment>
         <Notification />
-        <Navbar />
-        <Component {...pageProps} />
-        
+        {/* <Navbar /> */}
+        <UserLayout>
+          <Component {...pageProps} />
+        </UserLayout>
       </StyleManagment>
     </Provider>
   );

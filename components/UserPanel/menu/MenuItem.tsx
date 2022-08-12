@@ -14,8 +14,6 @@ const MenuItem = () => {
   const dispatch = useAppDispatch();
   const handleExpand = () => {
     list.map((el) => {
-      console.log("location.pathname" , location.pathname);
-      
       let cehck = el.routes.split(",").includes(location.pathname);
       if (cehck) {
         setActive(el.id);

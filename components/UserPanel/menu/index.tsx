@@ -1,9 +1,7 @@
-import * as React from "react";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -15,7 +13,16 @@ import {
 import { useAppDispatch } from "@/redux_/store";
 import { useSelector } from "react-redux";
 import MenuItem from "./MenuItem";
-
+import { useEffect, useState } from "react";
+import {
+  Typography,
+  useMediaQuery,
+  MenuItem as MI,
+  Menu as MU,
+} from "@mui/material";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { useRouter } from "next/router";
+import Link from "next/link";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -68,80 +75,135 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function Menu() {
+export const Menu = () => {
+  const router = useRouter();
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const open = useSelector(userPanelMenuSelector);
-  const c = () => {
-    dispatch(toggleUserMenu({
-      show : !open.show
-    }));
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorElLanguageList, setAnchorElLanguageList] =
+    useState<null | HTMLElement>(null);
+  const openMenuLang = Boolean(anchorEl);
+  const openMenuLangList = Boolean(anchorElLanguageList);
+  const handleClickMenuLang = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
   };
+  const handleCloseMenuLang = () => {
+    setAnchorEl(null);
+  };
+  const handleClickMenuLangList = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElLanguageList(event.currentTarget);
+  };
+  const handleCloseMenuLangList = () => {
+    setAnchorElLanguageList(null);
+  };
+  const c = () => {
+    dispatch(
+      toggleUserMenu({
+        show: !open.show,
+      })
+    );
+  };
+  useEffect(() => {
+    if (matches) {
+      dispatch(toggleUserMenu({ show: false }));
+    } else {
+      dispatch(toggleUserMenu({ show: true }));
+    }
+  }, [matches]);
   return (
-    <Box sx={{ display: "flex" }}>
-      <Drawer
-        variant="permanent"
-        open={open.show}
-        sx={{
-          "& > div > span": {
-            zIndex: "5",
+    <Drawer
+      variant="permanent"
+      open={open.show}
+      sx={{
+        "& > div > span": {
+          zIndex: "5",
+          width: "100% !important",
+          height: " 100% !important",
+          img: {
+            objectFit: "cover !important",
             width: "100% !important",
             height: " 100% !important",
-            img: {
-              objectFit: "cover !important",
-              width: "100% !important",
-              height: " 100% !important",
-            },
           },
+        },
+      }}
+    >
+      <Box
+        sx={{
+          zIndex: "6",
+          height: "93%",
         }}
       >
-        <Box
-          sx={{
-            zIndex: "6",
-          }}
-        >
-          <DrawerHeader>
-            <IconButton onClick={c}>
-              {open.show ? <CloseIcon /> : <MenuIcon />}
-            </IconButton>
-          </DrawerHeader>
-          <Divider sx={{ marginBottom: "10%", backgroundColor: "#ffffff3b" }} />
-          <MenuItem />
-        </Box>
-        <Image className="img" src="/image/Nav.svg" layout="fill" alt="" />
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        <DrawerHeader>
+          <IconButton onClick={c}>
+            {open.show ? <CloseIcon /> : <MenuIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider sx={{ marginBottom: "10%", backgroundColor: "#ffffff3b" }} />
+        <MenuItem />
       </Box>
-    </Box>
+      <Divider sx={{ backgroundColor: "#ffffff3b" }} />
+
+      <Box
+        sx={{
+          height: "7%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: "8",
+        }}
+      >
+        <IconButton
+          aria-controls={openMenuLang ? "settingMenu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={openMenuLang ? "true" : undefined}
+          onClick={handleClickMenuLang}
+          id="settingBtn"
+        >
+          <SettingsIcon />
+        </IconButton>
+        <MU
+          anchorEl={anchorEl}
+          open={openMenuLang}
+          onClose={handleCloseMenuLang}
+          id="settingMenu"
+          aria-labelledby="settingBtn"
+        >
+          <MI
+            aria-controls={openMenuLangList ? "settingMenu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={openMenuLangList ? "true" : undefined}
+            onClick={handleClickMenuLangList}
+          >
+            Language list
+          </MI>
+        </MU>
+        <MU
+          anchorEl={anchorElLanguageList}
+          open={openMenuLangList}
+          onClose={handleCloseMenuLangList}
+          id="settingMenu"
+          aria-labelledby="settingBtn"
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          // sx={{marginLeft:"30px"}}
+        >
+          <Link href={router.pathname} locale="en-us">
+            <MI>En-us</MI>
+          </Link>
+          <Link href={router.pathname} locale="fr-ir">
+            <MI>Fr-ir</MI>
+          </Link>
+        </MU>
+      </Box>
+      <Image className="img" src="/image/Nav.svg" layout="fill" alt="" />
+    </Drawer>
   );
-}
+};

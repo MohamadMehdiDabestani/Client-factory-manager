@@ -1,17 +1,19 @@
 import type { NextPage } from "next";
-import { UserPanel } from "@/components";
+import { Menu } from "@/components";
 import { Fragment } from "react";
 import Head from "next/head";
-const Register: NextPage = () => {
+import { Box, Typography } from "@mui/material";
+const Panel: NextPage = () => {
   return (
     <Fragment>
       <Head>
-        <title>{process.env.NEXT_PUBLIC_PROJ_NAME} | پنل مدیریت کارفرمایان</title>
+        <title>
+          {process.env.NEXT_PUBLIC_PROJ_NAME} | پنل مدیریت کارفرمایان
+        </title>
       </Head>
-      <UserPanel />
-      asd
+      <Typography>کارمندان</Typography>
     </Fragment>
   );
 };
 
-export default Register;
+export default Panel;

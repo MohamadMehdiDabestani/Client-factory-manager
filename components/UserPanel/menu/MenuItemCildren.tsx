@@ -16,7 +16,6 @@ import { userPanelMenuSelector } from "@/redux_/slices/common/UserPanelMenu";
 const MenuItemCildren = (props: any) => {
   const { show } = useSelector(userPanelMenuSelector);
   const router = useRouter();
-  console.log("prooops" , props);
   
   return (
     <Accordion

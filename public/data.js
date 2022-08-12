@@ -5,7 +5,7 @@ import EngineeringIcon from '@mui/icons-material/Engineering';
 const list = [
   {
     id: "1",
-    routes: "/panel,/panel/employees",
+    routes: "/panel,/panel/employees,/panel/employees/add,/panel/employees/roles",
     title: "کارمندان",
     icon: <EngineeringIcon sx={{ marginRight: "5%" }} />,
     list: [
@@ -19,16 +19,11 @@ const list = [
         activeRoute: "/panel/employees/add",
         title: "افزودن کارمند",
       },
-      // {
-      //   href: "/panel/bot",
-      //   activeRoute: "/panel/bot",
-      //   title: "ربات",
-      // },
-      // {
-      //   href: "/panel/strategy/add",
-      //   activeRoute: "/panel/strategy/add",
-      //   title: "استراتژی",
-      // },
+      {
+        href: "/panel/employees/roles",
+        activeRoute: "/panel/employees/roles",
+        title: "نقش ها",
+      },
     ],
   },
   {

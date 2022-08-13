@@ -13,21 +13,30 @@ export const UserLayout: FC<Props> = ({ children }) => {
   const { show } = useSelector(userPanelMenuSelector);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+  // <Box sx={{}}></Box>;
   return (
     <Fragment>
       <Menu />
-      <Box
-        sx={(theme) => ({
-          marginLeft: show ? (matches ? "0px" : "230px") : "50px",
-          padding: "20px 0",
-          transition: theme.transitions.create("margin-left", {
-            easing: theme.transitions.easing.easeInOut,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-        })}
+      <Container
+        maxWidth="xl"
+        sx={{
+          height:"100%",
+          background: theme.palette.mode === "light" ? "#e6e6e8" : "#121212",
+        }}
       >
-        <Container maxWidth="xl">{children}</Container>
-      </Box>
+        <Box
+          sx={(theme) => ({
+            marginLeft: show ? (matches ? "0px" : "230px") : "50px",
+            padding: "20px 0",
+            transition: theme.transitions.create("margin-left", {
+              easing: theme.transitions.easing.easeInOut,
+              duration: theme.transitions.duration.enteringScreen,
+            }),
+          })}
+        >
+          {children}
+        </Box>
+      </Container>
     </Fragment>
   );
 };

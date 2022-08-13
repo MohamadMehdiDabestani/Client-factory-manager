@@ -1,0 +1,13 @@
+{
+  "userName": "نام کاربری",
+  "dataGrid": {
+    "rowPerPage": "نمایش ردیف در هر صفه"
+  },
+  "dark" : "تیره",
+  "light" : "روشن",
+  "menu" : {
+    "setting" : {
+      "toggleTheme" : "تغییر تم به {{theme}}"
+    }
+  }
+}

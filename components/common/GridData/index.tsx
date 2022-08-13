@@ -6,9 +6,11 @@ import {
   faIR,
   GridToolbarContainer,
   GridToolbarDensitySelector,
+  enUS,
 } from "@mui/x-data-grid";
 import { Footer } from "./Footer";
 import { Toolbar } from "./Toolbar";
+import { useRouter } from "next/router";
 
 interface Props {
   columns: GridColumns<any>;
@@ -16,8 +18,8 @@ interface Props {
   inlineEditing: boolean;
 }
 
-
 export const GridData: FC<Props> = ({ columns, rows, inlineEditing }) => {
+  const { locale } = useRouter();
   return (
     <DataGrid
       pagination
@@ -25,9 +27,6 @@ export const GridData: FC<Props> = ({ columns, rows, inlineEditing }) => {
         border: "none",
         "& .MuiDataGrid-cell": {
           overflowX: "auto",
-        },
-        "& .MuiDataGrid-row > div": {
-          direction: "ltr",
         },
         "& div.MuiDataGrid-toolbarContainer": {
           justifyContent: "flex-end",
@@ -40,12 +39,15 @@ export const GridData: FC<Props> = ({ columns, rows, inlineEditing }) => {
         Pagination: Footer,
         Toolbar: Toolbar,
       }}
-      checkboxSelection 
+      checkboxSelection
       disableSelectionOnClick
       rows={rows}
-      // sx={{ direction: "rtl" }}
       columns={columns}
-      localeText={faIR.components.MuiDataGrid.defaultProps.localeText}
+      localeText={
+        locale == "fa-IR"
+          ? faIR.components.MuiDataGrid.defaultProps.localeText
+          : enUS.components.MuiDataGrid.defaultProps.localeText
+      }
       experimentalFeatures={{ newEditingApi: inlineEditing }}
     />
   );

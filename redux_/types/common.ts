@@ -1,4 +1,4 @@
-import { AlertColor } from "@mui/material";
+import { AlertColor, PaletteMode } from "@mui/material";
 
 export type InitialStateToggleNotification = {
   severity: AlertColor;
@@ -16,4 +16,7 @@ export type Initializer = {
 }
 export type UserPanelMenu = {
   show : boolean
+}
+export type Theming = {
+  mode : PaletteMode
 }

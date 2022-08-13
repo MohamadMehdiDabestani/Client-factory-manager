@@ -5,7 +5,9 @@ import toggleNotificationSelector from "@/redux_/slices/common/Notification";
 import validationAlertSelector from "@/redux_/slices/common/ValidationAlert";
 import initializerSelector from "@/redux_/slices/common/Initializer";
 import userPanelMenuSelector from "@/redux_/slices/common/UserPanelMenu";
+import themingSelector from "@/redux_/slices/common/Theming";
 const reducer = {
+  themingSelector,
   toggleNotificationSelector,
   validationAlertSelector,
   initializerSelector,

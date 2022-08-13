@@ -16,8 +16,10 @@ import {
 import { Fragment, useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import useTranslation from "next-translate/useTranslation";
 
 export const Footer = () => {
+  const { t, lang } = useTranslation("common");
   const apiRef = useGridApiContext();
   const page = useGridSelector(apiRef, gridPageSelector);
   const pageCount = useGridSelector(apiRef, gridPageCountSelector);
@@ -58,15 +60,8 @@ export const Footer = () => {
         onChange={(event, value) => apiRef.current.setPage(value - 1)}
         variant="outlined"
         shape="rounded"
-        renderItem={(item) => (
-          <PaginationItem
-            components={{
-              previous: NavigateNextIcon,
-              next: NavigateBeforeIcon,
-            }}
-            {...item}
-          />
-        )}
+        hidePrevButton
+        hideNextButton
       />
       <Button
         aria-controls={open ? "perPageMenu" : undefined}
@@ -76,7 +71,7 @@ export const Footer = () => {
         onClick={handleClick}
         variant="outlined"
       >
-        نمایش ردیف در هر صفه : {perPage}
+        {t("dataGrid.rowPerPage")} : {perPage}
       </Button>
       <Menu
         anchorEl={anchorEl}

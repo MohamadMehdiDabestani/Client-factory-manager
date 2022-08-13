@@ -4,9 +4,7 @@ import Head from "next/head";
 import { Fragment } from "react";
 
 const Roles = () => {
-  const {t , lang} = useTranslation('common')
-  console.log("lang" , lang);
-  
+  const { t } = useTranslation('common')
   return (
     <Fragment>
       <Head>

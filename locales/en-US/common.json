@@ -1,3 +1,13 @@
 {
-    "userName" : "User name"
+  "userName": "User name",
+  "dataGrid": {
+    "rowPerPage": "Row per page"
+  },
+  "dark" : "dark",
+  "light" : "light",
+  "menu" : {
+    "setting" : {
+      "toggleTheme" : "Change theme to {{theme}}"
+    }
+  }
 }

@@ -14,9 +14,7 @@ body,
   height: 100%;
   scroll-behavior: smooth;
 }
-body {
-  background: #e6e6e8;
-}
+
 * {
   box-sizing: border-box;
   font-family: "vazir" !important;

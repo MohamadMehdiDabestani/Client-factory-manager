@@ -23,6 +23,8 @@ import {
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { toggleTheme } from "@/redux_/slices/common/Theming";
+import useTranslation from "next-translate/useTranslation";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -81,6 +83,7 @@ export const Menu = () => {
   const dispatch = useAppDispatch();
   const open = useSelector(userPanelMenuSelector);
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const { t } = useTranslation("common");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [anchorElLanguageList, setAnchorElLanguageList] =
     useState<null | HTMLElement>(null);
@@ -178,6 +181,19 @@ export const Menu = () => {
           >
             Language list
           </MI>
+          <MI
+            onClick={() =>
+              dispatch(
+                toggleTheme({
+                  theme: theme.palette.mode === "light" ? "dark" : "light",
+                })
+              )
+            }
+          >
+            {t("menu.setting.toggleTheme", {
+              theme: t(theme.palette.mode === "light" ? "dark" : "light"),
+            })}
+          </MI>
         </MU>
         <MU
           anchorEl={anchorElLanguageList}
@@ -196,10 +212,10 @@ export const Menu = () => {
           // sx={{marginLeft:"30px"}}
         >
           <Link href={router.pathname} locale="en-us">
-            <MI>En-us</MI>
+            <MI>English</MI>
           </Link>
-          <Link href={router.pathname} locale="fr-ir">
-            <MI>Fr-ir</MI>
+          <Link href={router.pathname} locale="fa-ir">
+            <MI>فارسی</MI>
           </Link>
         </MU>
       </Box>

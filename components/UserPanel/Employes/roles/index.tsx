@@ -1,44 +1,82 @@
-import { GridColumns, GridRowsProp } from "@mui/x-data-grid";
+import { GridColumns } from "@mui/x-data-grid";
 import { GridData } from "@/components";
+
+import { Button, Paper } from "@mui/material";
+import usePrivateApi from "@/hooks/usePrivateApi";
+import { Fragment, useEffect, useState } from "react";
+import { fetch } from "@/types/public";
+import { useSelector } from "react-redux";
 import {
-  randomCreatedDate,
-  randomTraderName,
-  randomUpdatedDate,
-} from "@mui/x-data-grid-generator";
-import { Paper } from "@mui/material";
+  gridDataSelector,
+  toggleDeleteRow,
+} from "@/redux_/slices/common/GridData";
+import { useAppDispatch } from "@/redux_/store";
 
 const columns: GridColumns = [
-  { field: "name", headerName: "Name", width: 180, editable: true },
-  { field: "age", headerName: "Age", type: "number", editable: true },
+  { field: "id", headerName: "شناسه", hideable: false },
   {
-    field: "dateCreated",
-    headerName: "Date Created",
-    type: "date",
-    width: 180,
+    field: "roleName",
+    headerName: "نام نقش",
     editable: true,
-  },
-  {
-    field: "lastLogin",
-    headerName: "Last Login",
-    type: "dateTime",
-    width: 220,
-    editable: true,
+    width: 300,
+    hideable: true,
   },
 ];
-const rows: any = [];
-Array.from(Array(500).keys()).map((i) => {
-  rows.push({
-    id: i + 1,
-    name: randomTraderName(),
-    age: i + 2,
-    dateCreated: randomCreatedDate(),
-    lastLogin: randomUpdatedDate(),
-  });
-});
+
+interface response {
+  roleName: string;
+  id: string;
+}
 export const Roles = () => {
+  const { handleGet } = usePrivateApi();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [list, setList] = useState<response[] | null>(null);
+  const { clickDeleteRowsBtn, idItems } = useSelector(gridDataSelector);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (loading) {
+      setLoading(false);
+      const fetch: fetch = {
+        method: "GET",
+        type: "external",
+        url: "/api/Employer/GetAllRole",
+        data: {},
+      };
+      console.log("I sent");
+      handleGet<response[]>(fetch, (data) => setList(data.data));
+    }
+  }, []);
+  useEffect(() => {
+    if (clickDeleteRowsBtn) {
+      console.log("clicked", idItems);
+      dispatch(toggleDeleteRow({ status: false }));
+    }
+  }, [clickDeleteRowsBtn]);
+  if (loading || list == null) return <p>is loading</p>;
+
   return (
-    <Paper sx={{ height: "500px", direction: "rtl" }}>
-      <GridData rows={rows} columns={columns} inlineEditing={true} />
-    </Paper>
+    <Fragment>
+      <Button variant="contained" sx={{ margin: "10px 0" }}>
+        افزودن نقش جدید
+      </Button>
+      <Paper sx={{ height: "500px", direction: "rtl" }}>
+        <GridData
+          gridProps={{
+            loading,
+            rows: list,
+            columns: columns,
+            initialState: {
+              columns: {
+                columnVisibilityModel: {
+                  id: false,
+                },
+              },
+            },
+          }}
+          inlineEditing={true}
+        />
+      </Paper>
+    </Fragment>
   );
 };

@@ -8,15 +8,22 @@ export type InitialStateToggleNotification = {
 };
 export type ValidationAlert = {
   list: string[] | null;
-  description : string
+  description: string;
 };
 export type Initializer = {
-  token : string,
-  refreshToken : string
-}
+  token: string;
+  refreshToken: string;
+};
 export type UserPanelMenu = {
-  show : boolean
-}
+  show: boolean;
+};
 export type Theming = {
-  mode : PaletteMode
-}
+  mode: PaletteMode;
+};
+export type GridData = {
+  clickDeleteRowsBtn: boolean;
+  idItems: number[];
+};
+export type DialogBox = {
+  show: boolean;
+};

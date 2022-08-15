@@ -1,27 +1,26 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import {
   DataGrid,
-  GridColumns,
-  GridRowsProp,
   faIR,
-  GridToolbarContainer,
-  GridToolbarDensitySelector,
   enUS,
+  DataGridProps,
+  GridSelectionModel,
 } from "@mui/x-data-grid";
 import { Footer } from "./Footer";
 import { Toolbar } from "./Toolbar";
 import { useRouter } from "next/router";
 
 interface Props {
-  columns: GridColumns<any>;
-  rows: GridRowsProp;
   inlineEditing: boolean;
+  gridProps: DataGridProps;
 }
 
-export const GridData: FC<Props> = ({ columns, rows, inlineEditing }) => {
+export const GridData: FC<Props> = ({ inlineEditing, gridProps }) => {
   const { locale } = useRouter();
+  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
   return (
     <DataGrid
+      {...gridProps}
       pagination
       sx={{
         border: "none",
@@ -39,10 +38,12 @@ export const GridData: FC<Props> = ({ columns, rows, inlineEditing }) => {
         Pagination: Footer,
         Toolbar: Toolbar,
       }}
+      onSelectionModelChange={(newSelectionModel) => {
+        setSelectionModel(newSelectionModel);
+      }}
+      selectionModel={selectionModel}
       checkboxSelection
       disableSelectionOnClick
-      rows={rows}
-      columns={columns}
       localeText={
         locale == "fa-IR"
           ? faIR.components.MuiDataGrid.defaultProps.localeText

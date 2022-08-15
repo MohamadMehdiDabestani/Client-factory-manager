@@ -6,12 +6,16 @@ import validationAlertSelector from "@/redux_/slices/common/ValidationAlert";
 import initializerSelector from "@/redux_/slices/common/Initializer";
 import userPanelMenuSelector from "@/redux_/slices/common/UserPanelMenu";
 import themingSelector from "@/redux_/slices/common/Theming";
+import gridDataSelector from "@/redux_/slices/common/GridData";
+import dialogBoxSelector from "@/redux_/slices/common/DialogBox";
 const reducer = {
   themingSelector,
   toggleNotificationSelector,
   validationAlertSelector,
   initializerSelector,
-  userPanelMenuSelector
+  userPanelMenuSelector,
+  gridDataSelector,
+  dialogBoxSelector
 };
 
 export const store = configureStore({

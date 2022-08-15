@@ -10,6 +10,7 @@ import {
   gridPageCountSelector,
   gridPageSelector,
   gridPageSizeSelector,
+  gridSelectionStateSelector,
   useGridApiContext,
   useGridSelector,
 } from "@mui/x-data-grid";
@@ -24,6 +25,7 @@ export const Footer = () => {
   const page = useGridSelector(apiRef, gridPageSelector);
   const pageCount = useGridSelector(apiRef, gridPageCountSelector);
   const perPage = useGridSelector(apiRef, gridPageSizeSelector);
+  
   useEffect(() => {
     apiRef.current.setPageSize(5);
   }, []);

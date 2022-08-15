@@ -1,7 +1,8 @@
 {
   "userName": "User name",
   "dataGrid": {
-    "rowPerPage": "Row per page"
+    "rowPerPage": "Row per page",
+    "deleteMultipleRow" : "Delete {{count}} item(s)"
   },
   "dark" : "dark",
   "light" : "light",

@@ -1,35 +1,31 @@
-import axios from "axios";
+import axios from "@/api/axios";
 import { fetch, responseType } from "@/types/public";
 import { useAppDispatch } from "@/redux_/store";
 import { showErrorNotif } from "@/redux_/slices/common/Notification";
 import { hideList, showList } from "@/redux_/slices/common/ValidationAlert";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
-import { initializerSelector, setToken } from "@/redux_/slices/common/Initializer";
+import {
+  initializerSelector,
+  setToken,
+} from "@/redux_/slices/common/Initializer";
 import { useSelector } from "react-redux";
 interface responseRefreshToken {
-  expireAt : string,
-  token : string,
-  refreshToken : string,
-  refreshTokenExpireAt : string
+  expireAt: string;
+  token: string;
+  refreshToken: string;
+  refreshTokenExpireAt: string;
 }
 const useApi = () => {
   const dispatch = useAppDispatch();
 
-  const config = {
-    local: "",
-    external: process.env.NEXT_PUBLIC_API,
-  };
   const handleGet = <T extends unknown>(
     fetch: fetch,
     okCallback: (data: responseType<T>) => void,
     errorCallback?: () => void,
     fnCallback?: () => void
   ) => {
-    const api = config[fetch.type];
-    // getToken()
-      
     axios
-      .get<responseType<T>>(`${api}${fetch.url}`, {
+      .get<responseType<T>>(fetch.url, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -45,7 +41,7 @@ const useApi = () => {
         }
       })
       .catch(({ response }) => {
-        if(response) {
+        if (response) {
           if (response.data.description) {
             dispatch(
               showErrorNotif({
@@ -68,9 +64,8 @@ const useApi = () => {
     errorCallback?: () => void,
     fnCallback?: () => void
   ) => {
-    const api = config[fetch.type];
     axios
-      .post<responseType<T>>(`${api}${fetch.url}`, fetch.data, {
+      .post<responseType<T>>(fetch.url, fetch.data, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -86,7 +81,7 @@ const useApi = () => {
         }
       })
       .catch(({ response }) => {
-        if(response) {
+        if (response && response.dataّ) {
           console.log("error", response.data);
           if (response.data.isValidationError) {
             dispatch(
@@ -113,7 +108,7 @@ const useApi = () => {
         console.log("finally");
       });
   };
-  return { handlePost , handleGet };
+  return { handlePost, handleGet };
 };
 
 export default useApi;

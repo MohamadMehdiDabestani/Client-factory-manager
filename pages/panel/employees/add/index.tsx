@@ -1,8 +1,7 @@
 import type { NextPage } from "next";
-import { Menu, UserLayout } from "@/components";
-import { Fragment } from "react";
 import Head from "next/head";
-import { Box, Typography } from "@mui/material";
+import { Fragment } from "react";
+import { AddEmployes } from "@/components";
 
 const Add: NextPage = () => {
   return (
@@ -10,7 +9,7 @@ const Add: NextPage = () => {
       <Head>
         <title>{process.env.NEXT_PUBLIC_PROJ_NAME} | ایجاد کارمند</title>
       </Head>
-        <Typography>ایجاد کارمند</Typography>
+      <AddEmployes />
     </Fragment>
   );
 };

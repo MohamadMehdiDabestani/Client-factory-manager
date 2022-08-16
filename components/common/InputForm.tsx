@@ -1,6 +1,18 @@
 import { ReactElement } from "react";
-import { IconButton, InputAdornment, TextField, SxProps } from "@mui/material";
-import { InputError , InputDefaultValue , InputTouched } from "@/types/public";
+import {
+  IconButton,
+  InputAdornment,
+  TextField,
+  SxProps,
+  TextFieldProps,
+  MenuItem,
+} from "@mui/material";
+import {
+  InputError,
+  InputDefaultValue,
+  InputTouched,
+  selectListDisplay,
+} from "@/types/public";
 interface Props {
   sx: SxProps;
   label: string;
@@ -18,27 +30,44 @@ interface Props {
   error: InputError;
   touched: InputTouched;
   icon?: ReactElement;
+  list?: selectListDisplay[] | null;
 }
 export const InputForm = (props: Props) => {
+  const config: TextFieldProps = {
+    label: props.label,
+    variant: "filled",
+    fullWidth: true,
+    sx: props.sx,
+    onChange: props.change,
+    error: props.touched ? (props.error ? true : false) : false,
+    helperText: props.touched && props.error,
+    value: props.value,
+    id: props.id,
+    name: props.id,
+    InputProps: {
+      endAdornment: (
+        <InputAdornment position="end">
+          <IconButton edge="end">{props?.icon}</IconButton>
+        </InputAdornment>
+      ),
+    },
+  };
+  if (props.type == "select") {
+    return (
+      <TextField select {...config}>
+        {props.list?.map((el: any, idx: number) => (
+          <MenuItem value={el.id} key={idx}>
+            {el.displayName}
+          </MenuItem>
+        ))}
+      </TextField>
+    );
+  }
   return (
     <TextField
-      label={props.label}
-      variant="filled"
-      sx={props.sx}
+      // select={props.type == "select"}
+      {...config}
       type={props.type}
-      onChange={props.change}
-      error={props.touched ? props.error ? true : false : false}
-      helperText={props.touched && props.error}
-      value={props.value}
-      id={props.id}
-      name={props.id}
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton edge="end">{props?.icon}</IconButton>
-          </InputAdornment>
-        ),
-      }}
     />
   );
 };

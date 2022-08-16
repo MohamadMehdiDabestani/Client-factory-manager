@@ -22,6 +22,11 @@ export interface input {
   label: string;
   id: string;
   icon?: ReactElement;
+  list?: any; // this is required if type of input is Select
+}
+export interface selectListDisplay {
+  id: string;
+  displayName: string;
 }
 // FORM TYPS
 
@@ -53,6 +58,4 @@ export interface responseType<T> {
   isValidationError: boolean;
   validationErrors: string[];
 }
-export interface emptyResponse {
-  
-}
+export interface emptyResponse {}

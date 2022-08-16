@@ -2,13 +2,15 @@
   "userName": "User name",
   "dataGrid": {
     "rowPerPage": "Row per page",
-    "deleteMultipleRow" : "Delete {{count}} item(s)"
+    "deleteMultipleRow": "Delete {{count}} item(s)"
   },
-  "dark" : "dark",
-  "light" : "light",
-  "menu" : {
-    "setting" : {
-      "toggleTheme" : "Change theme to {{theme}}"
+  "dark": "dark",
+  "light": "light",
+  "menu": {
+    "setting": {
+      "toggleTheme": "Change theme to {{theme}}"
     }
-  }
+  },
+  "send": "Send",
+  "cancel": "Cancel"
 }

@@ -2,13 +2,15 @@
   "userName": "نام کاربری",
   "dataGrid": {
     "rowPerPage": "نمایش ردیف در هر صفه",
-    "deleteMultipleRow" : "حذف {{count}} مورد"
+    "deleteMultipleRow": "حذف {{count}} مورد"
   },
-  "dark" : "تیره",
-  "light" : "روشن",
-  "menu" : {
-    "setting" : {
-      "toggleTheme" : "تغییر تم به {{theme}}"
+  "dark": "تیره",
+  "light": "روشن",
+  "menu": {
+    "setting": {
+      "toggleTheme": "تغییر تم به {{theme}}"
     }
-  }
+  },
+  "send": "ارسال",
+  "cancel": "لغو"
 }

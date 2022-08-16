@@ -3,12 +3,7 @@ import { fetch, responseType } from "@/types/public";
 import { useAppDispatch } from "@/redux_/store";
 import { showErrorNotif } from "@/redux_/slices/common/Notification";
 import { hideList, showList } from "@/redux_/slices/common/ValidationAlert";
-import { getCookie, hasCookie, setCookie } from "cookies-next";
-import {
-  initializerSelector,
-  setToken,
-} from "@/redux_/slices/common/Initializer";
-import { useSelector } from "react-redux";
+
 interface responseRefreshToken {
   expireAt: string;
   token: string;

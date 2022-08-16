@@ -2,6 +2,7 @@
   "locales": ["en-US", "fa-IR"],
   "defaultLocale": "en-US",
   "pages": {
-    "*": ["common"]
+    "*": ["common", "validation"],
+    "/panel/employees/roles": ["role"]
   }
 }

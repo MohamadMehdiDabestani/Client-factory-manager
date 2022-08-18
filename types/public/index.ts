@@ -22,7 +22,7 @@ export interface input {
   label: string;
   id: string;
   icon?: ReactElement;
-  list?: any; // this is required if type of input is Select
+  list?: selectListDisplay[] | null; // this is required if type of input is Select
 }
 export interface selectListDisplay {
   id: string;
@@ -59,3 +59,13 @@ export interface responseType<T> {
   validationErrors: string[];
 }
 export interface emptyResponse {}
+
+// SHEET TYPES
+export type Cols = {
+  key : number,
+  name : string
+}
+export interface readSheetResult {
+  cols: Cols[];
+  rows: any[];
+}

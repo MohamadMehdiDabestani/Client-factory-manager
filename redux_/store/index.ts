@@ -8,6 +8,7 @@ import userPanelMenuSelector from "@/redux_/slices/common/UserPanelMenu";
 import themingSelector from "@/redux_/slices/common/Theming";
 import gridDataSelector from "@/redux_/slices/common/GridData";
 import dialogBoxSelector from "@/redux_/slices/common/DialogBox";
+import addEmployeerSelector from "@/redux_/slices/Employes/AddEmployeer";
 const reducer = {
   themingSelector,
   toggleNotificationSelector,
@@ -15,7 +16,8 @@ const reducer = {
   initializerSelector,
   userPanelMenuSelector,
   gridDataSelector,
-  dialogBoxSelector
+  dialogBoxSelector,
+  addEmployeerSelector,
 };
 
 export const store = configureStore({
